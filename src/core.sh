@@ -85,7 +85,6 @@ info_list=(
     "指纹 (Fingerprint)"
     "公钥 (Public key)"
     "用户名 (Username)"
-    "shortId"
 )
 change_list=(
     "更改协议"
@@ -1339,7 +1338,7 @@ get() {
                 [[ ! $is_servername ]] && is_servername=$is_random_servername
                 [[ ! $is_private_key ]] && get_pbk
                 is_short_id=$(openssl rand -hex 8)
-                is_stream='security:"reality",realitySettings:{dest:"'${is_servername}\:443'",serverNames:["'${is_servername}'",""],publicKey:"'$is_public_key'",privateKey:"'$is_private_key'",shortIds:["'$is_short_id'"]}' 
+                is_stream='security:"reality",realitySettings:{dest:"'${is_servername}\:443'",serverNames:["'${is_servername}'",""],publicKey:"'$is_public_key'",privateKey:"'$is_private_key'",shortIds:["'$is_short_id'"]}'
                 if [[ $is_client ]]; then
                     is_stream='security:"reality",realitySettings:{serverName:"'${is_servername}'",fingerprint:"chrome",publicKey:"'$is_public_key'",shortId:"'$is_short_id'",spiderX:"/"}'
                 fi
@@ -1534,9 +1533,9 @@ info() {
         if [[ $is_reality ]]; then
             is_color=41
             is_can_change=(0 1 5 10 11)
-            is_info_show=(0 1 2 3 15 8 16 17 18 20)
-            is_info_str=($is_protocol $is_addr $port $uuid xtls-rprx-vision reality $is_servername "chrome" $is_public_key $is_short_id)
-            is_url="$is_protocol://$uuid@$is_addr:$port?encryption=none&security=reality&flow=xtls-rprx-vision&type=tcp&sni=$is_servername&pbk=$is_public_key&fp=chrome&sid=$is_short_id#233boy-$net-$is_addr"
+            is_info_show=(0 1 2 3 15 8 16 17 18)
+            is_info_str=($is_protocol $is_addr $port $uuid xtls-rprx-vision reality $is_servername "chrome" $is_public_key)
+            is_url="$is_protocol://$uuid@$is_addr:$port?encryption=none&security=reality&flow=xtls-rprx-vision&type=tcp&sni=$is_servername&pbk=$is_public_key&fp=chrome#233boy-$net-$is_addr"
         fi
         ;;
     ss)
